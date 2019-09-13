@@ -10,6 +10,8 @@ def main():
     """..."""
     file = open("movies.csv", "r")
     movies = file.readlines()
+    for i, movie in enumerate(movies):
+        movies[i] = movie.split(",")
     print("Movies To Watch 1.0 - by Matthew Howlett")
     again = True
     while again:
@@ -32,11 +34,11 @@ def list_movies(movies):
     watched = 0
     unwatched = 0
     for i, movie in enumerate(movies):
-        if movie.split(",")[3] == "w\n":
-            print("{:5}{:35} - {:4} ({})".format(str(i) + ".", movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
+        if movie[3] == "w\n":
+            print("{:5}{:35} - {:4} ({})".format(str(i) + ".", movie[0], movie[1], movie[2]))
             watched += 1
         else:
-            print("{:3}{:2}{:35} - {:4} ({})".format(str(i) + ".", "*", movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
+            print("{:3}{:2}{:35} - {:4} ({})".format(str(i) + ".", "*", movie[0], movie[1], movie[2]))
             unwatched += 1
     print("{} movies watched, {} movies still to watch".format(watched, unwatched))
 
@@ -53,13 +55,17 @@ def check_error(minimum, maximum, variable_to_be_checked):
 
 
 def add_movie(movies):
+    new_movie = []
     title = input("Enter movie title: ")
+    new_movie.append(title)
     year_made = input("Enter year made: ")
     while not check_error(0, 2019, year_made):
         print("Year made must be between 0 and 2019")
         year_made = input("Enter year made: ")
+    new_movie.append(year_made)
     genre = input("Enter genre: ")
-    new_movie = title + "," + year_made + "," + genre + ",u"
+    new_movie.append(genre)
+    new_movie.append("u")
     movies.append(new_movie)
 
 
