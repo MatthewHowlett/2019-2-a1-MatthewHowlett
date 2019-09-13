@@ -28,5 +28,13 @@ def main():
     file.close()
 
 
+def list_movies(movies):
+    for i, movie in enumerate(movies):
+        if movie.split(",")[3] == "w\n":
+            print("{:10} - {:4} ({})".format(movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
+        else:
+            print("{}{:10} - {:4} ({})".format("*", movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
+
+
 if __name__ == '__main__':
-   main()
+    main()
