@@ -36,5 +36,15 @@ def list_movies(movies):
             print("{}{:10} - {:4} ({})".format("*", movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
 
 
+def check_error(minimum, maximum, variable_to_be_checked):
+    try:
+        if int(variable_to_be_checked) < minimum or int(variable_to_be_checked) > maximum:
+            return False
+        else:
+            return True
+    except ValueError:
+        return False
+
+
 if __name__ == '__main__':
     main()
