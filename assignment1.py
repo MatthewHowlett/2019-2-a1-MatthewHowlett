@@ -45,28 +45,35 @@ def list_movies(movies):
 
 def check_error(minimum, maximum, variable_to_be_checked):
     try:
-        if int(variable_to_be_checked) < minimum or int(variable_to_be_checked) > maximum:
+        if int(variable_to_be_checked) < minimum:
+            print("Number must be >=", minimum)
+            return False
+        elif int(variable_to_be_checked) > maximum:
+            print("Number must be <=", maximum)
             return False
         else:
             return True
     except ValueError:
-        print("Input must be an integer")
+        print("Invalid input; enter a valid number")
         return False
 
 
 def add_movie(movies):
     new_movie = []
-    title = input("Enter movie title: ")
+    title = input("Title: ")
     new_movie.append(title)
-    year_made = input("Enter year made: ")
+    year_made = input("Year: ")
     while not check_error(0, 2019, year_made):
-        print("Year made must be between 0 and 2019")
-        year_made = input("Enter year made: ")
+        year_made = input("Year: ")
     new_movie.append(year_made)
-    genre = input("Enter genre: ")
+    genre = input("Category: ")
+    while genre == "":
+        print("Input cannot be blank")
+        genre = input("Category")
     new_movie.append(genre)
     new_movie.append("u")
     movies.append(new_movie)
+    print("{} ({} from {}) added to movie list".format(title, genre, year_made))
 
 
 if __name__ == '__main__':
