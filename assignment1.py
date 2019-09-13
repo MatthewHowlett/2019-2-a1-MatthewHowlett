@@ -76,5 +76,23 @@ def add_movie(movies):
     print("{} ({} from {}) added to movie list".format(title, genre, year_made))
 
 
+def watch_movie(movies):
+    unwatched = 0
+    for i, movie in enumerate(movies):
+        if movie[3] == "u\n":
+            unwatched += 1
+    if unwatched == 0:
+        print("No more movies to watch!")
+        return None
+    watched_movie_number = input("Enter the number of a movie to mark as watched")
+    while not check_error(0, len(movies), watched_movie_number):
+        watched_movie_number = input("Enter the number of a movie to mark as watched")
+    if movies[int(watched_movie_number)][3] == "w\n":
+        print("You have already watched", movies[int(watched_movie_number)][0])
+        return None
+    movies[int(watched_movie_number)][3] = "w\n"
+    print(movies[int(watched_movie_number)][0], "from", movies[int(watched_movie_number)][1], "watched")
+
+
 if __name__ == '__main__':
     main()
