@@ -8,10 +8,14 @@ GitHub URL: https://github.com/cp1404-students/2019-2-a1-MatthewHowlett
 
 def main():
     """..."""
-    file = open("movies.csv", "r")
-    movies = file.readlines()
+    read_file = open("movies.csv", "r")
+    movies = read_file.readlines()
     for i, movie in enumerate(movies):
-        movies[i] = movie.split(",")
+        if movie == "\n":
+            del movies[i]
+        else:
+            movies[i] = movie.split(",")
+    append_file = open("movies.csv", "a")
     print("Movies To Watch 1.0 - by Matthew Howlett")
     again = True
     while again:
@@ -24,10 +28,15 @@ def main():
             watch_movie(movies)
         elif choice == "Q":
             again = False
-            print("Have a nice day :)")
+            write_file = open("movies.csv", "w")
+            for i, movie in enumerate(movies):
+                print("{},{},{},{}".format(movie[0], movie[1], movie[2], movie[3]), file=write_file)
+            print("{} movies saved to movies.csv \nHave a nice day :)".format(len(movies)))
         else:
             print("Invalid menu choice")
-    file.close()
+    read_file.close()
+    write_file.close()
+    append_file.close()
 
 
 def list_movies(movies):
