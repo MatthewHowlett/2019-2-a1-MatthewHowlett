@@ -31,9 +31,9 @@ def main():
 def list_movies(movies):
     for i, movie in enumerate(movies):
         if movie.split(",")[3] == "w\n":
-            print("{:10} - {:4} ({})".format(movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
+            print("{:35} - {:4} ({})".format(movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
         else:
-            print("{}{:10} - {:4} ({})".format("*", movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
+            print("{}{:34} - {:4} ({})".format("*", movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
 
 
 def check_error(minimum, maximum, variable_to_be_checked):
@@ -43,7 +43,19 @@ def check_error(minimum, maximum, variable_to_be_checked):
         else:
             return True
     except ValueError:
+        print("Input must be an integer")
         return False
+
+
+def add_movie(movies):
+    title = input("Enter movie title: ")
+    year_made = input("Enter year made: ")
+    while not check_error(0, 2019, year_made):
+        print("Year made must be between 0 and 2019")
+        year_made = input("Enter year made: ")
+    genre = input("Enter genre: ")
+    new_movie = title + "," + year_made + "," + genre + ",u"
+    movies.append(new_movie)
 
 
 if __name__ == '__main__':
