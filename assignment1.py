@@ -29,11 +29,16 @@ def main():
 
 
 def list_movies(movies):
+    watched = 0
+    unwatched = 0
     for i, movie in enumerate(movies):
         if movie.split(",")[3] == "w\n":
-            print("{:35} - {:4} ({})".format(movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
+            print("{:5}{:35} - {:4} ({})".format(str(i) + ".", movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
+            watched += 1
         else:
-            print("{}{:34} - {:4} ({})".format("*", movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
+            print("{:3}{:2}{:35} - {:4} ({})".format(str(i) + ".", "*", movie.split(",")[0], movie.split(",")[1], movie.split(",")[2]))
+            unwatched += 1
+    print("{} movies watched, {} movies still to watch".format(watched, unwatched))
 
 
 def check_error(minimum, maximum, variable_to_be_checked):
